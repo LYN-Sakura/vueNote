@@ -50,7 +50,7 @@ methods //存放函数（值是一个对象）
 	|-- |-- |
 	|enter		|按下回车			|
 	|delete		|按下delete删除键	|
-	|...		|官网查看	|
+	|其他请参考vue官网		|[vue按键修饰符点此跳转](https://cn.vuejs.org/v2/guide/events.html#%E6%8C%89%E9%94%AE%E4%BF%AE%E9%A5%B0%E7%AC%A6)	|
 	```js
 	//自定义键盘修饰符，名字自定义，但是对应的值要对应键盘码(e.keyCode)的值
 	Vue.config.keyCodes.fl = 112
