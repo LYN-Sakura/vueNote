@@ -4,13 +4,30 @@
 * vetur
 * vue 2 snippets
 * one dark pro
+* prettier-code formattor		格式化
 
-### vue基础语法
+### 设计思想
+1. mvc
+	* 后端架构思想
+2. mvvc
+	* 前端架构思想
+		* m : `model`
+			* 数据层 **Vue**中 数据层都放在data中
+		* v : `view`视图
+			* **Vue**中`view`即我们的HTML页面
+		* vm : `view-model` 控制器 将数据和视图建立关系
+			* `vm`即 **Vue** 的实例 就是 vm
+
+![mvvm形象图](./images/mvvm形象图.jpg)
+
+
+### vue基础语法参数
 ```
-el //挂载，关联
-data //模型数据（值是一个对象）
-methods //存放函数（值是一个对象）
-{{ }} //插值表达式，将数据填充在页面，支持一些js计算
+el 				//挂载，关联
+data 			//模型数据（值是一个对象）
+methods 		//存放函数（值是一个对象）
+computed 		//计算属性，让模板变得更加简单，调用其中的属性不需要加()
+{{ }} 			//插值表达式，将数据填充在页面，支持一些js计算
 ```
 
 ### 指令
@@ -35,6 +52,17 @@ methods //存放函数（值是一个对象）
 
 > ※ 注意事项	
 * v-model : 限制在`<input>`、`<select>`、`<textarea>`、`components`（组件）中使用
+	
+	--------------------------------------------------
+	>语法：v-model.表单修饰符
+	
+	|表单修饰符	|作用						|
+	|--|--|
+	|number		|转化为数值					|
+	|trim		|去掉开始和结尾的空格		|
+	|lazy		|将input事件切换为change事件|
+
+
 * v-on:事件="fun" 
 	1. 当fun不带()时，函数中的第一个形参传回当前事件对象
 	2. 当fun带()时，函数中有一个 **固定的实参** `$event`代表当前事件对象；`$event.target`是dom对象
@@ -89,18 +117,7 @@ methods //存放函数（值是一个对象）
 <!-- 双向绑定原理代码 -->
 <input v-bind:value="msg" @input="msg=$event.target.value" />
 ```
-### 设计思想
-1. mvc
-	* 后端架构思想
-2. mvvc
-	* 前端架构思想
-		* m : `model`
-			* 数据层 **Vue**中 数据层都放在data中
-		* v : `view`视图
-			* **Vue**中`view`即我们的HTML页面
-		* vm : `view-model` 控制器 将数据和视图建立关系
-			* `vm`即 **Vue** 的实例 就是 vm
 
-![mvvm形象图](./images/mvvm形象图.jpg)
-
+### 自定义指令
+[官网CV它不香吗？](https://cn.vuejs.org/v2/guide/custom-directive.html#ad)
 
