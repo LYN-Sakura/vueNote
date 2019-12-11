@@ -1,6 +1,6 @@
 > 目录
 [toc]
-### vscode插件
+### 增加写Vue体验的vscode插件
 * vetur
 * vue 2 snippets
 * one dark pro
