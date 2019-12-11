@@ -54,7 +54,7 @@ watch			//侦听器;存放函数（值是一个对象）；函数名为要监听
 |v-else="条件"									| 满足判断条件，显示所在标签					| 无								|
 |v-else-if="条件"								| 满足判断条件，显示所在标签					| 有								|
 |v-show="条件"	※						| 控制元素样式是否显示；相当于更改display		| 有								|
-|v-for="(value,index) in 数组" :key="value.id" 	※	| 遍历数组;一定要加:key=>增加效率				| 有								|
+|v-for="(value,index) in 数组" :key="value.id" 	※	| 遍历数组;一定要加:key=>提高效率				| 有								|
 |v-for="(value,key,index) in 对象"				| 遍历对象						| 有								|
 
 >  ※  注意事项	
