@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>Document</title>
+		<style type="text/css">
+			.grid {
+				margin: auto;
+				width: 530px;
+				text-align: center;
+			}
+
+			.grid table {
+				border-top: 1px solid #C2D89A;
+				width: 100%;
+				border-collapse: collapse;
+			}
+
+			.grid th,
+			td {
+				padding: 10;
+				border: 1px dashed #F3DCAB;
+				height: 35px;
+				line-height: 35px;
+			}
+
+			.grid th {
+				background-color: #F3DCAB;
+			}
+
+			.grid .book {
+				padding-bottom: 10px;
+				padding-top: 5px;
+				background-color: #F3DCAB;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="app">
+			<div class="grid">
+				<div>
+					<h1>图书管理</h1>
+					<div class="book">
+						<div>
+							<label for="id">
+								编号：
+							</label>
+							<input type="text" :disabled="flag" id="id" v-model="id">
+							<label for="name">
+								名称：
+							</label>
+							<input type="text" id="name" v-model="name">
+							<button @click="push">提交</button>
+						</div>
+					</div>
+				</div>
+				<table>
+					<thead>
+						<tr>
+							<th>编号</th>
+							<th>名称</th>
+							<th>时间</th>
+							<th>操作</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr v-for="(v,i) in books">
+							<td v-text="i+1"></td>
+							<td v-text="v.name"></td>
+							<td>{{v.date |formDate}}</td>
+							<td>
+								<a href="javascript:;" @click="updata(v.id)">修改</a>
+								<span>|</span>
+								<a href="javascript:;" @click="del(v.id)">删除</a>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<script type="text/javascript" src="js/vue.js"></script>
+		<script type="text/javascript">
+			//过滤
+			Vue.filter("formDate", function(val) {
+				let y = (val.getFullYear() + "").padStart(2, 0)
+				let m = (val.getMonth() + 1 + "").padStart(2, 0)
+				let d = (val.getDate() + "").padStart(2, 0)
+				let h = (val.getHours() + "").padStart(2, 0)
+				let f = (val.getMinutes() + "").padStart(2, 0)
+				let s = (val.getSeconds() + "").padStart(2, 0)
+				let str = `${y}-${m}-${d} ${h}:${f}:${s}`
+				return str;
+			})
+
+			/*
+			  图书管理-添加图书
+			*/
+			var vm = new Vue({
+				el: '#app',
+				data: {
+					id: "",
+					name: "",
+					flag: false,
+					books: [{
+						id: 1,
+						name: '三国演义',
+						date: new Date()
+					}, {
+						id: 2,
+						name: '水浒传',
+						date: new Date()
+					}, {
+						id: 3,
+						name: '红楼梦',
+						date: new Date()
+					}, {
+						id: 4,
+						name: '西游记',
+						date: new Date()
+					}]
+				},
+				methods: {
+					push() {
+						if (this.id != "" && this.name != "") {
+							if (this.flag) {
+								// let index = this.books.findIndex(item => item.id == this.id)
+								// this.books[index].id = this.id
+								// this.books[index].name = this.name
+
+
+								this.books.some(item => {
+									if (item.id == this.id) {
+										item.name= this.name
+										//注意这里是用return true 阻止
+										return true
+									}
+								})
+							} else {
+								let obj = {
+									id: this.id,
+									name: this.name,
+									date: new Date()
+								}
+								this.books.push(obj)
+							}
+
+							this.flag = false
+							this.id = this.name = "";
+						} else {
+							alert("请输入完整信息")
+						}
+
+					},
+					del(id) {
+						let index = this.books.findIndex(item => item.id == id)
+						this.books.splice(index, 1)
+					},
+					updata(id) {
+						this.flag = true
+						let arr = this.books.filter(item => item.id == id)
+						this.id = arr[0].id
+						this.name = arr[0].name
+					}
+
+				}
+			})
+		</script>
+	</body>
+</html>

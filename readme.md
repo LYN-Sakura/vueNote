@@ -29,6 +29,8 @@ data 			//模型数据（值是一个对象）
 methods 	※	//存放函数（值是一个对象）；无缓存
 computed 	※	//计算属性，存放函数（值是一个对象）;让模板变得更加简单；有缓存
 watch			//侦听器;存放函数（值是一个对象）；函数名为要监听的吧变量名；函数第一个形参为输入的值
+directives		//局部自定义指令
+filters			//局部过滤器
 {{ }} 			//插值表达式，将数据填充在页面，支持一些js计算
 ```
 > ※ 注意事项
@@ -93,6 +95,7 @@ watch			//侦听器;存放函数（值是一个对象）；函数名为要监听
 	|enter		|按下回车			|
 	|delete		|按下delete删除键	|
 	|其他请参考vue官网		|[vue按键修饰符点此跳转](https://cn.vuejs.org/v2/guide/events.html#%E6%8C%89%E9%94%AE%E4%BF%AE%E9%A5%B0%E7%AC%A6)	|
+	
 	```js
 	//自定义键盘修饰符，名字自定义，但是对应的值要对应键盘码(e.keyCode)的值
 	Vue.config.keyCodes.fl = 112
@@ -129,5 +132,54 @@ watch			//侦听器;存放函数（值是一个对象）；函数名为要监听
 ### 自定义指令
 [官网CV它不香吗？](https://cn.vuejs.org/v2/guide/custom-directive.html#ad)
 
+```js
+//cv =>复制粘贴
+// 注册一个全局自定义指令 `v-focus`
+Vue.directive('focus', {
+  // 当被绑定的元素插入到 DOM 中时……
+  inserted: function (el) {
+    // 聚焦元素
+    el.focus()
+  }
+})
+// 注册一个局部自定义指令 `v-focus`
+directives: {
+  focus: {
+    // 指令的定义
+    inserted: function (el) {
+      el.focus()
+    }
+  }
+}
+```
+
+
 ### 过滤器
 [官网CV它不香吗？](https://cn.vuejs.org/v2/guide/filters.html#ad)
+
+```html
+<!-- cv =>复制粘贴 -->
+<!-- 在双花括号中; | : “管道”符号 -->
+{{ message | capitalize }}
+
+<!-- 在 `v-bind` 中 -->
+<div v-bind:id="rawId | formatId"></div>
+```
+
+```js
+// 注册一个全局过滤器 
+Vue.filter('capitalize', function (value) {
+	if (!value) return ''
+	value = value.toString()
+	return value.charAt(0).toUpperCase() + value.slice(1)
+})
+
+// 注册一个局部过滤器 
+filters: {
+	capitalize: function (value) {
+		if (!value) return ''
+		value = value.toString()
+		return value.charAt(0).toUpperCase() + value.slice(1)
+  }
+}
+```
