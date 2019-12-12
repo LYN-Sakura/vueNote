@@ -1,5 +1,3 @@
-> 目录
-[toc]
 ### 增加写Vue体验的vscode插件
 * vetur
 * vue 2 snippets
