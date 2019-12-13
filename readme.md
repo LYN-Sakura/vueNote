@@ -181,6 +181,16 @@ filters: {
   }
 }
 ```
+
+### 补充知识
+* 修改响应式数据
+	```js
+		//参数详解：list:vue实例中的数组/对象数据，index：下标/属性，value：将数据修改成value
+		Vue.set(list,index,value)
+		//参数详解：vm:储存vue实例的变量，其余参数同上，效果同上，只是语法不同
+		vm.$set(list,index,value)
+	```
+
 --------------------------------------------------
 
 ### vue进阶=>[组件](https://cn.vuejs.org/v2/guide/components.html#ad)
