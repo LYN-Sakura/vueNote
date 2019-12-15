@@ -254,3 +254,83 @@ filters: {
 ```
 * 作用域插槽
 待定
+
+### restful形式的URL
+	1. get		查询
+	2. post		添加
+	3. put		修改
+	4. delete	删除
+
+### 接口调用-fetch
+
+```js
+fetch("url",{
+	//设置一些选项
+	methed:'get',
+	//下面为post/put传参需要添加的选项
+	body:"name=44&pwd=2222",
+	headers:{
+		"Content-Type":"application/x-www-form-urlencoded"
+	}
+	//另一种post传递的参数为json格式
+	//需要用JSON的转字符串方法	
+	body:JSON.stringify({
+		name:55,
+		age:55
+	}),
+	headers:{
+		"Content-Type":"application/json"
+	}
+	
+}).then(function(data){
+	//text属于fetch一部分，返回promise对象
+	return data.text()
+	//json数据获取推荐，使用text获取的是字符串，需要转换json.prase()
+	return data.json()
+}).then(function(data){
+	//这里才是最终数据
+	console.log(data)
+})
+```
+
+### 接口调用-axios	！重点
+
+
+```js
+//get 请求
+axios.get("url"，{
+	params:{
+		//get的参数
+	}
+}).then(ret=>{
+	//data属性名称是固定的,用于获取后台响应的数据
+	console.log(ret.data)
+})
+//另一种写法
+async function fn(){
+	let {data}=await axios.get("http://localhost:3000/adata",{
+		//推荐掌握的传递参数方式
+		params:{
+			//get的参数
+		}
+	})
+	console.log(data)
+}
+
+//post请求
+async function fn() {
+	let { data } = await axios.post('http://localhost:3000/axios', {
+		uname:22,
+		pwd:2222
+	});
+	console.log(data);
+}
+
+* 全局配置
+```js
+axios.defaults.timeout = 3000 //超时时间
+			axios.defaults.baseURL = 'http://localhost:3000/'	//默认地址
+			axios.defaults.headers['自定义名称'] = "hello"	//请求头
+			
+```
+```
