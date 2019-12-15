@@ -326,11 +326,70 @@ async function fn() {
 	console.log(data);
 }
 
-* 全局配置
-```js
+// 全局配置
+
+
 axios.defaults.timeout = 3000 //超时时间
-			axios.defaults.baseURL = 'http://localhost:3000/'	//默认地址
-			axios.defaults.headers['自定义名称'] = "hello"	//请求头
-			
+axios.defaults.baseURL = 'http://localhost:3000/'	//默认地址
+axios.defaults.headers['自定义名称'] = "hello"	//请求头			
+
 ```
+
+
+### 前端路由
+* 路由
+	1. 后端路由
+		`概念`：根据不同的用户`URL请求`，返回不同的内容
+		`本质`：`URL请求地址`与`服务器资源之间`的对应关系
+	2. 前端路由
+		>SPA（Single Page Application）
+		* 后端渲染（存在性能问题）
+		* Ajax前端渲染（前端渲染提高性能，但是不支持浏览器前进后退操作）
+		* SPA 单页面应用程序；整个网站只有一个页面，内容的变化通过Ajax局部更新实现，同时支持浏览器的前进和后退操作
+		* SPA实现原理之一：基于URL地址的hash(hash的变化会导致浏览器记录访问历史的变化，但是hash的变化不会触发新的URL请求)
+		* 在实现SPA过程中，最核心的技术点就是前端路由
+	
+	
+>了解
+	
+	* 历史模式：	history.pushStatus
+
+* 具体实现代码如下
+```js
+<div id="app">
+	//路由链接
+	<router-link to="shan">看这山</router-link>
+	<router-link to="shui">看这水</router-link>
+	//显示的区域
+	<router-view></router-view>
+</div>
+<script type="text/javascript">
+	//储存模板的常量
+	const shan = {
+		template: `<div>这是山</div>`
+	};
+	const shui = {
+		template: `<div>这是水</div>`
+	};
+	//路由实例
+	const router = new VueRouter({
+		routes:[{
+			//path:页面中写的地址 ，也就是 to="URL" 中的URL
+			path:"/shan",
+			//上方定义好的常量模板
+			component:shan
+		},
+		{
+			path:"/shui",
+			component:shui
+		}]
+	})
+	
+	
+	const vm = new Vue({
+		el: '#app',
+		//属性和参数相同，可以简写；启动路由
+		router
+	});
+</script>
 ```
