@@ -350,9 +350,9 @@ axios.defaults.headers['自定义名称'] = "hello"	//请求头
 		* 在实现SPA过程中，最核心的技术点就是前端路由
 	
 	
->了解
-	
-	* 历史模式：	history.pushStatus
+>Vue的两种路由模式
+	* hash模式：即地址栏URL中的#符号
+	* 历史模式：	history.pushState
 
 * 具体实现代码如下
 ```js
